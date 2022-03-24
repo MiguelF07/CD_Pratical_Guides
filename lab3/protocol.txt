@@ -1,0 +1,30 @@
+Objetivo                    Destino                 Mensagem
+
+Format(format)              Broker                  {"command":"format", "message_format":"ex:JSON"}
+Subscribe(topic)            Broker                  {"command":"subscribe", "topic":"ex:random"}
+Publish(message,topic)      Broker                  {"command":"publish", "topic":"ex:random", "message":"ex:idk"}
+ListTopicsReq()             Broker                  {"command":"list"}
+ListTopicsRep()             Consumer                {"command":"listRep" "message": [topic, topic, topic, etc]}
+Cancel(topic)               Broker                  {"command":"cancel","topic":"ex:random"}
+
+
+Mensagem Format: A mensagem format é a primeira mensagem enviada (sempre em JSON) tanto pelos Consumidores como pelos Produtores 
+e enviam-na para o broker dizendo formato em que irão enviar e receber mensagens.
+
+Mensagem Subscribe: Esta mensagem é enviada pelos Consumers para o Broker para notificarem que se querem subscrever a um dado
+ tópico. 
+
+Mensagem Publish: A mensagem publish é enviada pelo Producer ao Broker que vai enviar para todos os consumers que
+estejam subscritos ao tópico no qual foi feita a publicação.
+
+Mensagem ListTopicReq: A  mensagem é enviada pelos Consumers quando querem receber a lista de tópicos atuais.
+
+Mensagem ListTopicRep: Esta mensagem é enviada em resposta à mensagem ListTopicReq e tem como argumento a lista de topicos
+a que determinado consumidor está subscrito.
+
+Mensagem Cancel: A mensagem cancel faz com que o consumidor que a envia deixe de estar subscrito ao tópico que passa como 
+argumento.
+
+0 -> JSON
+1 -> XML
+2 -> PICKLE
